@@ -1,11 +1,24 @@
-import Button from "./Button";
-import styles from "./App.module.css";
+import { useEffect, useState } from "react";
 
-function App() {
+function Hello() {
+  useEffect(() => {
+    console.log("created :)");
+    return () => console.log("destroyed :(");
+  }, []);
   return (
     <div>
-      <h1>Welcome back!</h1>
-      <Button className={styles.title} text="Button" />
+      <h1>Hello!</h1>
+    </div>
+  );
+}
+
+function App() {
+  const [showing, setShowing] = useState(false);
+  const onClick = () => setShowing((prev) => !prev);
+  return (
+    <div>
+      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
+      {showing ? <Hello /> : null}
     </div>
   );
 }
